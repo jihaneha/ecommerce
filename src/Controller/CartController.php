@@ -12,7 +12,7 @@ use Symfony\Component\Routing\Annotation\Route;
 class CartController extends AbstractController
 {
     #[Route('/cart/add/{id}', name: 'cart_add', requirements: ['id' => '\d+'])]
-
+    // ajout d'un produit au panier
     public function add($id, ProductRepository $productRepository, CartService $cartService, Request $request)
     {
         // verifier si le produit existe

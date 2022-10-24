@@ -13,8 +13,6 @@ use Symfony\Component\Validator\Constraints as Assert;
 #[ORM\Entity(repositoryClass: UserRepository::class)]
 
 // on implemente la UserInterface car l'utilisateurs sont tjrs different l'un des autres.
-
-
 class User implements UserInterface, PasswordAuthenticatedUserInterface
 {
     #[ORM\Id]
@@ -23,62 +21,39 @@ class User implements UserInterface, PasswordAuthenticatedUserInterface
     private ?int $id = null;
 
     #[ORM\Column(length: 180, unique: true)]
-    // #[Assert\NotBlank(message = "error : le nom de la catégorie est obligatoir !")]
-    /**
-     * @Assert\NotBlank(message="error : l'adresse email est obligatoir !")
-     */
-
     private ?string $email = null;
-
     #[ORM\Column]
     private array $roles = [];
-
     /**
      * @var string The hashed password
      */
     #[ORM\Column]
     private ?string $password = null;
-
     #[ORM\Column(length: 255)]
-    /**
-     * @Assert\NotBlank(message="error : le nom de la catégorie est obligatoir !")
-     * @Assert\Length(min=3, minMessage="le nom doit faire au moin 3 caractères")
-     */
     private ?string $fullName = null;
-
     #[ORM\OneToMany(mappedBy: 'user', targetEntity: Purchase::class)]
     private Collection $purchases;
-
     #[ORM\OneToMany(mappedBy: 'owner', targetEntity: Category::class)]
     private Collection $categories;
-
     public function __construct()
     {
         $this->purchases = new ArrayCollection();
         $this->categories = new ArrayCollection();
     }
-    // public function __toString()
-    // {
-    //     return $this->getEmail();
-    // }
-
     public function getId(): ?int
     {
         return $this->id;
     }
-
     public function getEmail(): ?string
     {
         return $this->email;
     }
-
     public function setEmail(string $email): self
     {
         $this->email = $email;
 
         return $this;
     }
-
     /**
      * A visual identifier that represents this user.
      *
@@ -88,7 +63,6 @@ class User implements UserInterface, PasswordAuthenticatedUserInterface
     {
         return (string) $this->email;
     }
-
     /**
      * @see UserInterface
      */
@@ -100,14 +74,12 @@ class User implements UserInterface, PasswordAuthenticatedUserInterface
 
         return array_unique($roles);
     }
-
     public function setRoles(array $roles): self
     {
         $this->roles = $roles;
 
         return $this;
     }
-
     /**
      * @see PasswordAuthenticatedUserInterface
      */
@@ -115,14 +87,12 @@ class User implements UserInterface, PasswordAuthenticatedUserInterface
     {
         return $this->password;
     }
-
     public function setPassword(string $password): self
     {
         $this->password = $password;
 
         return $this;
     }
-
     /**
      * @see UserInterface
      */
@@ -131,19 +101,16 @@ class User implements UserInterface, PasswordAuthenticatedUserInterface
         // If you store any temporary, sensitive data on the user, clear it here
         // $this->plainPassword = null;
     }
-
     public function getFullName(): ?string
     {
         return $this->fullName;
     }
-
     public function setFullName(string $fullName): self
     {
         $this->fullName = $fullName;
 
         return $this;
     }
-
     /**
      * @return Collection<int, Purchase>
      */
@@ -151,7 +118,6 @@ class User implements UserInterface, PasswordAuthenticatedUserInterface
     {
         return $this->purchases;
     }
-
     public function addPurchase(Purchase $purchase): self
     {
         if (!$this->purchases->contains($purchase)) {
@@ -161,7 +127,6 @@ class User implements UserInterface, PasswordAuthenticatedUserInterface
 
         return $this;
     }
-
     public function removePurchase(Purchase $purchase): self
     {
         if ($this->purchases->removeElement($purchase)) {
@@ -173,7 +138,6 @@ class User implements UserInterface, PasswordAuthenticatedUserInterface
 
         return $this;
     }
-
     /**
      * @return Collection<int, Category>
      */
@@ -181,7 +145,6 @@ class User implements UserInterface, PasswordAuthenticatedUserInterface
     {
         return $this->categories;
     }
-
     public function addCategory(Category $category): self
     {
         if (!$this->categories->contains($category)) {

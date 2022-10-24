@@ -5,13 +5,14 @@
 
 {% block body %}
 	<div class="container">
-		<h3 class="mb-3 mt-5">Mon Compte</h3>
+		<h1 class="mb-3 mt-5">Mon Compte</h1>
 		<p>Bienvenue
 			{{ app.user.fullName }}
 			dans votre compte .
 		</p>
 		<p>
-			c'est dans cet espace que vous allez pouvoir gérer toutes vos informations personnelles .</p>
+			C'est dans cet espace que vous allez pouvoir gérer toutes vos informations personnelles .
+		</p>
 		<ul>
 			<li>
 				<a href="{{path('change_password')}}">
@@ -19,13 +20,10 @@
 				</a>
 			</li>
 			<li class="nav-item active">
-				<a class="" href="{{path('purchases_index')}}">
+				<a href="{{path('purchases_index')}}">
 					Voir la liste de vos commandes
 				</a>
 			</li>
 		</ul>
-
-
 	</div>
-
 {% endblock %}
