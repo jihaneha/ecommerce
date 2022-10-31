@@ -22,9 +22,9 @@ class RegisterController extends AbstractController
         $user = new User();
         //je creer le formulaire correspondant
         $form = $this->createForm(RegisterType::class, $user);
-        //je gere le formulaire 
+        //je gère le formulaire 
         $form->handleRequest($request);
-        //si le formulaire est bon je gere l'inscription
+        //si le formulaire est bon je gère l'inscription
         if ($form->isSubmitted() && $form->isValid()) {
 
             $user->setPassword(
@@ -35,11 +35,12 @@ class RegisterController extends AbstractController
                 )
             );
             $user = $form->getData();
-            //on inscris dans la bdd
+            //je l'inscris dans la bdd
             $em->persist($user);
-            //nous allons enregistrer l'utilisateu
+            //j'enregistre l'utilisateur
             $em->flush();
             $this->addFlash('success', 'Votre compte à été créer avec succée ');
+            // je le redérige vers la page de connexion
             return $this->redirectToRoute('security_login');
         }
         $formView = $form->createView();

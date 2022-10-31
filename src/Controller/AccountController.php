@@ -42,8 +42,10 @@ class AccountController extends AbstractController
                 $user->setPassword($password);
                 //mettre à jour le mdp
                 $em->flush();
-                //j'affiche un message a l'utilisateur
+                //j'affiche un message à l'utilisateur
                 $this->addFlash('success', 'Votre mot de passe à été modifié avec succée ');
+            } else {
+                $this->addFlash('warning', 'Votre mot de passe actuel est invalide');
             }
         }
         $user = $form->getData();
