@@ -14,6 +14,7 @@ class EmailService
         $this->mailer = $mailer;
     }
 
+
     public function sendNotificationEmail(string $recipient, string $subject, string $content)
     {
         $email = (new Email())

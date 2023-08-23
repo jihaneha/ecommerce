@@ -28,16 +28,14 @@ class AccountController extends AbstractController
         $user = $this->getUser();
         $form = $this->createForm(ChangePasswordType::class, $user);
         $form->handleRequest($request);
-        // si le formulaire à été envoyé et s'il est valide
+
         if ($form->isSubmitted() && $form->isValid()) {
-            // je verifie d'abord si le mdp saisie est différent
-            //  de celui sur la bdd
-            //je recupère l'ancien mdp
+
             $old_password = $form->get('old_password')->getData();
             if ($encoder->isPasswordValid($user, $old_password)) {
-                //je récupere de nouveau mdp saisie
+
                 $new_password = $form->get('new_password')->getData();
-                //j'encode le nouveau mdp
+
                 $password = $encoder->hashPassword($user, $new_password);
                 $user->setPassword($password);
                 //mettre à jour le mdp
